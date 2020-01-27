@@ -2,15 +2,26 @@
   <div class="col-sm-4 stock">
     <div class="card border-success mb-3" style="max-width: 22rem;">
       <div class="card-header">
-        {{stock.name}}
-        <small>(Price: {{stock.price}})</small>
+        {{ stock.name }}
+        <small>(Price: {{ stock.price }})</small>
       </div>
       <div class="card-body text-success">
         <div class="float-left">
-          <input type="number" class="form-control" placeholder="Quantity" v-model="quantity" />
+          <input
+            type="number"
+            class="form-control"
+            placeholder="Quantity"
+            v-model="quantity"
+          />
         </div>
         <div class="float-right">
-          <button class="btn btn-success" @click="buyStock" :disabled="quantity <= 0">Buy</button>
+          <button
+            class="btn btn-success"
+            @click="buyStock"
+            :disabled="quantity <= 0"
+          >
+            Buy
+          </button>
         </div>
       </div>
     </div>
@@ -33,6 +44,7 @@ export default {
         stockPrice: this.stock.price,
         quantity: this.quantity
       };
+      this.$store.dispatch("buyStock", order);
       this.quantity = 0;
     }
   }
