@@ -1,9 +1,11 @@
 <template>
   <div class="col-sm-4 stock">
-    <div class="card border-success mb-3" style="max-width: 22rem;">
+    <div class="card border-info mb-3" style="max-width: 22rem;">
       <div class="card-header">
         {{ stock.name }}
-        <small>(Price: {{ stock.price }} | Quantity: {{ quantity }})</small>
+        <small
+          >(Price: {{ stock.price }} | Quantity: {{ stock.quantity }})</small
+        >
       </div>
       <div class="card-body text-success">
         <div class="float-left">
@@ -39,14 +41,18 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["sellStock"]),
+    // Array or Object to rename from portfolio store
+    ...mapActions({
+      sellStockAction: "sellStock"
+    }),
     sellStock() {
       const order = {
         stockId: this.stock.id,
         stockPrice: this.stock.price,
         quantity: this.quantity
       };
-      this.sellStock();
+      this.sellStockAction(order);
+      this.quantity = 0;
     }
   }
 };
