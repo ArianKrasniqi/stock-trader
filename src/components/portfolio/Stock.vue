@@ -14,21 +14,28 @@
             class="form-control"
             placeholder="Quantity"
             v-model="quantity"
+            :class="{ danger: insufficientQuantity }"
           />
         </div>
         <div class="float-right">
           <button
             class="btn btn-success"
             @click="sellStock"
-            :disabled="quantity <= 0"
+            :disabled="insufficientQuantity || quantity <= 0"
           >
-            Sell
+            {{ insufficientQuantity ? "No Stocks" : "Sell" }}
           </button>
         </div>
       </div>
     </div>
   </div>
 </template>
+
+<style scoped>
+.danger {
+  border: 1px solid red;
+}
+</style>
 
 <script>
 import { mapActions } from "vuex";
@@ -39,6 +46,12 @@ export default {
     return {
       quantity: 0
     };
+  },
+  computed: {
+    insufficientQuantity() {
+      console.log(this.stock.quantity);
+      return this.quantity > this.stock.quantity;
+    }
   },
   methods: {
     // Array or Object to rename from portfolio store
