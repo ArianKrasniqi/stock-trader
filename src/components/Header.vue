@@ -27,29 +27,38 @@
 
       <span class="navbar-text">
         <ul class="navbar-nav mr-auto">
-          <a href="#" class="nav-link" tag="li" @click="endDay">End Day</a>
-          <a
-            class="nav-link"
-            href="#"
-            id="navbarDropdown"
-            role="button"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-            tag="li"
+          <li>
+            <a href="#" class="nav-link" @click="endDay">End Day</a>
+          </li>
+          <li
+            class="nav-item dropdown"
+            @click="idDropdownOpen = !idDropdownOpen"
           >
-            Save and Load
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
+            <a
+              class="nav-link"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Save and Load
+            </a>
+            <div
+              class="dropdown-menu"
+              :class="{ show: idDropdownOpen }"
+              aria-labelledby="navbarDropdown"
+            >
+              <a class="dropdown-item" @click="saveData" href="#">Save Data</a>
+              <a class="dropdown-item" href="#">Load Data</a>
+            </div>
+          </li>
           <strong class="nav-link"> Funds: {{ funds | currency }} </strong>
         </ul>
       </span>
 
+      <!--      
       <form class="form-inline my-2 mr-lg-0">
         <input
           class="form-control mr-sm-2"
@@ -61,6 +70,7 @@
           Search
         </button>
       </form>
+      -->
     </div>
   </nav>
 </template>
@@ -69,15 +79,28 @@
 import { mapActions } from "vuex";
 
 export default {
-  methods: {
-    ...mapActions(["randomizeStocks"]),
-    endDay() {
-      this.randomizeStocks();
-    }
+  data() {
+    return {
+      idDropdownOpen: false
+    };
   },
   computed: {
     funds() {
       return this.$store.getters.funds;
+    }
+  },
+  methods: {
+    ...mapActions(["randomizeStocks"]),
+    endDay() {
+      this.randomizeStocks();
+    },
+    saveData() {
+      const data = {
+        funds: this.$store.getters.funds,
+        stockPortfolio: this.$store.getters.stockPortfolio,
+        stocks: this.$store.getters.stocks
+      };
+      this.$http.put("data.json", data);
     }
   }
 };
