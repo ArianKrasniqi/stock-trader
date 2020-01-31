@@ -51,7 +51,7 @@
               aria-labelledby="navbarDropdown"
             >
               <a class="dropdown-item" @click="saveData" href="#">Save Data</a>
-              <a class="dropdown-item" href="#">Load Data</a>
+              <a class="dropdown-item" @click="loadData" href="#">Load Data</a>
             </div>
           </li>
           <strong class="nav-link"> Funds: {{ funds | currency }} </strong>
@@ -90,7 +90,10 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["randomizeStocks"]),
+    ...mapActions({
+      randomizeStocks: "randomizeStocks",
+      fetchData: "loadData"
+    }),
     endDay() {
       this.randomizeStocks();
     },
@@ -101,6 +104,9 @@ export default {
         stocks: this.$store.getters.stocks
       };
       this.$http.put("data.json", data);
+    },
+    loadData() {
+      this.fetchData();
     }
   }
 };
