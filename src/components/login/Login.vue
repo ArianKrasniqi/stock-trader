@@ -27,6 +27,10 @@
       </div>
       <button type="submit" class="btn btn-primary submit">Submit</button>
     </form>
+    <small id="emailHelp" class="form-text text-muted"
+      >Don't have account.
+      <a class="text-danger" href="/signup">Sign up here</a></small
+    >
   </div>
 </template>
 

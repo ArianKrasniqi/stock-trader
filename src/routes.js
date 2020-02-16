@@ -5,9 +5,9 @@ import Login from "./components/login/Login.vue";
 import Signup from "./components/signup/Signup.vue";
 
 export const routes = [
-  { path: "/", component: Login },
+  { path: "/signin", component: Login },
   { path: "/signup", component: Signup },
-  { path: "/home", component: Home },
+  { path: "/", component: Home },
   { path: "/portfolio", component: Portfolio },
   { path: "/stocks", component: Stocks }
 ];

@@ -2,7 +2,7 @@
   <div class="home">
     <h5>Be a better investor</h5>
     <h3>JOIN STOCK TRADER TODAY</h3>
-    <button type="button" class="btn btn-outline-primary">Join now</button></button>
+    <button type="button" class="btn btn-outline-primary join"><a class="join" href="/signin">Join now</a></button></button>
     <hr />
     <p>Your Funds: {{ funds | currency }}</p>
     <app-heading></app-heading>
@@ -31,5 +31,11 @@ export default {
 .home {
   text-align: center;
   padding: 30px;
+}
+.join{
+  text-decoration: none;
+}
+.join:hover{
+  color: white
 }
 </style>
