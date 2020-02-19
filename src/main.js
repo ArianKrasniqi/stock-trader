@@ -5,6 +5,7 @@ import VueResorce from "vue-resource";
 import App from "./App.vue";
 import { routes } from "./routes";
 import store from "./store/store";
+import { createProvider } from './vue-apollo'
 
 Vue.use(VueRouter);
 Vue.use(VueResorce);
@@ -24,5 +25,6 @@ new Vue({
   el: "#app",
   router: router,
   store,
+  apolloProvider: createProvider(),
   render: h => h(App)
 });

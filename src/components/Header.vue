@@ -1,5 +1,6 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <app-modal :isOpen="isAddPostOpen"></app-modal>
     <!-- <a class="navbar-brand" href="#">Navbar</a> -->
     <router-link to="/" class="navbar-brand">Stock Trader</router-link>
     <!-- Mobile Menu -->
@@ -27,6 +28,11 @@
 
       <span class="navbar-text">
         <ul class="navbar-nav mr-auto">
+          <li>
+            <button type="button" class="btn btn-dark" @click="modalHandler">
+              Add Post
+            </button>
+          </li>
           <li>
             <a href="#" class="nav-link" @click="endDay">End Day</a>
           </li>
@@ -77,12 +83,16 @@
 
 <script>
 import { mapActions } from "vuex";
+import Modal from "../elements/Modal.vue";
 
 export default {
   data() {
     return {
-      idDropdownOpen: false
+      isAddPostOpen: false
     };
+  },
+  components: {
+    appModal: Modal
   },
   computed: {
     funds() {
@@ -107,6 +117,9 @@ export default {
     },
     loadData() {
       this.fetchData();
+    },
+    modalHandler() {
+      this.isAddPostOpen = !this.isAddPostOpen;
     }
   }
 };

@@ -7,6 +7,7 @@
       v-bind:id="input.id"
       aria-describedby="emailHelp"
       required
+      v-model="input.value"
     />
   </div>
 </template>
